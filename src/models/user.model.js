@@ -64,7 +64,7 @@ userSchema.pre("save", async function (next){
 
 
 userSchema.methods.isPasswordCorrect = async function(password){
-   await bcrypt.compare(password, this.password)
+   return await bcrypt.compare(password,this.password)
 }
 
 
@@ -95,4 +95,4 @@ userSchema.methods.genarateRefreshToken = function(){
     )
 }
  
-export const User = mongoose.model("User", userSchema)
+export const User = mongoose.model("User",userSchema)
