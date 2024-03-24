@@ -301,7 +301,7 @@ const updateAccountDetails = asyncHandler(async () => {
         throw new ApiError(400, "All fields are required")
     }
 
-    const user = User.findByIdAndUpdate(
+    const user = await User.findByIdAndUpdate(
         req.user?._id,
         {
             $set: {
@@ -339,6 +339,8 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
         {new: true}
 
     ).select("-password")
+
+    //tastk ==> delete the previous pixture in the database
     return res
     .status(200)
     .json(new ApiResponse(200,user,"avatar updated successfully"))
